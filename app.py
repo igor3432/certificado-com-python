@@ -1,7 +1,7 @@
 import openpyxl
-from pil import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont
 workbook_alunos = openpyxl.load_workbook('planilha_alunos.xlsx')
-sheet_alunos = workbook_alunos['sheet1']
+sheet_alunos = workbook_alunos['Sheet1']
 
 for indice,linha in enumerate (sheet_alunos.iter_rows(min_row=2,max_row=2)):
     nome_curso = linha[0].value
@@ -11,14 +11,14 @@ for indice,linha in enumerate (sheet_alunos.iter_rows(min_row=2,max_row=2)):
     data_final = linha[4].value
     carga_Horaria = linha[5].value 
     data_emissao = linha[6].value
-    input('')
+    
 
-    fonte_nome = ImageFont.truetype('./tahoma.ttf')
-    fonte_nome = ImageFont.truetype('./tahomabd.ttf')
+    fonte_nome = ImageFont.truetype('./tahoma.ttf',90)
+    fonte_nome = ImageFont.truetype('./tahomabd.ttf',80)
 
-    Image.open('./certificado_padrao.jpg')
-    desenhar = ImageDraw.Draw(Image)
+    image = Image.open('./certificado_padrao.jpg')
+    desenhar = ImageDraw.Draw(image)
 
-    desenhar.text((200,600),nome_participante,fill='black',font=fonte_nome)
+    desenhar.text((1020,827),nome_participante,fill='black',font=fonte_nome)
 
-    Image.save(f'./(indice)(nome_participante)certificado_padrao.png')
+    image.save(f'./(indice)(nome_participante)certificado_padrao.png')
